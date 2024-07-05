@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emoji to Favicon Link Generator</title>
+<style>
+body, html {
+  height: 100%;
+  margin:0;
+}
+* { box-sizing: border-box;}
+
+form {
+  padding:1em;
+  background-image: linear-gradient(hsl(240, 50%, 65.5%),hsl(240, 100%, 25.5%));
+  display: grid;
+  grid-template: auto auto auto 1fr / 1fr auto;
+  gap: 1em;
+}
+textarea, output { grid-column: span 2; background: white;}
+</style>
+</head>
+<body>
+<form>
+<input type="text" id="emoji-name" placeholder="Enter emoji name" />
+<button type="button">Generate Link</button>
+<output id="svg-source"></output>
+<textarea id="encoded-html"  ></textarea>
+</form>
+
+<script type="module">
+let emojis = []
+
+  try {
+    let response = await fetch('./emojis.json')
+    let data = await response.json()
+     emojis = data.emojis
+  } catch(e){
+    alert(e)
+  }
+  
+  let generateLink = () =>  {
+    const inputVal = document.querySelector('#emoji-name').value.toLowerCase();
+
+    const emoji = emojis
+      .find(({translation, emoji}) => translation.toLowerCase().includes(inputVal) ).emoji
+
+    if (emoji) {
+      const svgData = `<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>${emoji}</text></svg>`;
+      document.querySelector('output').textContent = svgData
+      const encodedData = encodeURIComponent(svgData);
+
+      const linkTag = `<link rel="icon" href="data:image/svg+xml,${encodedData}" />`;
+      document.head.insertAdjacentHTML('beforeend', linkTag)
+      document.querySelector('#svg-source').value = svgData
+      document.querySelector('#encoded-html').value = linkTag
+
+    } else {
+      document.querySelector('#output').value = 'Emoji not found';
+    }
+  }
+
+  document.querySelector('button')
+  .addEventListener('click', () => generateLink())
+
+  addEventListener('submit', e => e.preventDefault())
+</script>
+
+</body>
+</html>
