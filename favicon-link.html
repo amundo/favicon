@@ -19,52 +19,52 @@ form {
   gap: 1em;
 }
 textarea, output { grid-column: span 2; background: white;}
-</style>
+</style> 
 </head>
 <body>
 <form>
-<input type="text" id="emoji-name" placeholder="Enter emoji name" />
+<input type="text" id="emoji-input" placeholder="Enter emoji or emoji name" />
 <button type="button">Generate Link</button>
 <output id="svg-source"></output>
-<textarea id="encoded-html"  ></textarea>
+<textarea id="encoded-html"></textarea>
 </form>
 
 <script type="module">
 let emojis = []
 
-  try {
-    let response = await fetch('./emojis.json')
-    let data = await response.json()
-     emojis = data.emojis
-  } catch(e){
-    alert(e)
-  }
-  
-  let generateLink = () =>  {
-    const inputVal = document.querySelector('#emoji-name').value.toLowerCase();
+try {
+  let response = await fetch('./emojis.json')
+  let data = await response.json()
+  emojis = data.emojis
+} catch(e) {
+  alert(e)
+}
 
-    const emoji = emojis
-      .find(({translation, emoji}) => translation.toLowerCase().includes(inputVal) ).emoji
+let generateLink = () =>  {
+  const inputVal = document.querySelector('#emoji-input').value;
+  let emoji;
 
-    if (emoji) {
-      const svgData = `<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>${emoji}</text></svg>`;
-      document.querySelector('output').textContent = svgData
-      const encodedData = encodeURIComponent(svgData);
-
-      const linkTag = `<link rel="icon" href="data:image/svg+xml,${encodedData}" />`;
-      document.head.insertAdjacentHTML('beforeend', linkTag)
-      document.querySelector('#svg-source').value = svgData
-      document.querySelector('#encoded-html').value = linkTag
-
-    } else {
-      document.querySelector('#output').value = 'Emoji not found';
-    }
+  if (/\p{Emoji}/u.test(inputVal)) {
+    emoji = inputVal;
+  } else {
+    emoji = emojis.find(({translation}) => translation.toLowerCase().includes(inputVal.toLowerCase()))?.emoji;
   }
 
-  document.querySelector('button')
-  .addEventListener('click', () => generateLink())
+  if (emoji) {
+    const svgData = `<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 16 16'><text x='0' y='14'>${emoji}</text></svg>`;
+    document.querySelector('#svg-source').textContent = svgData;
+    const encodedData = encodeURIComponent(svgData);
+    const linkTag = `<link rel="icon" href="data:image/svg+xml,${encodedData}" />`;
+    document.head.insertAdjacentHTML('beforeend', linkTag);
+    document.querySelector('#encoded-html').value = linkTag;
+  } else {
+    document.querySelector('#svg-source').textContent = 'Emoji not found';
+    document.querySelector('#encoded-html').value = '';
+  }
+}
 
-  addEventListener('submit', e => e.preventDefault())
+document.querySelector('button').addEventListener('click', generateLink);
+addEventListener('submit', e => e.preventDefault());
 </script>
 
 </body>
