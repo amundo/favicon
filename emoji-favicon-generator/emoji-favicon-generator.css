@@ -1,0 +1,27 @@
+
+emoji-favicon-generator {
+  display: grid;
+  .matching-emojis-ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5em;
+    list-style-type: none;
+    padding:0;
+    li {
+      display: inline-block;
+    }
+  }
+  pre.encoded-html {
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-wrap: break-word;
+    max-height: 200px;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 1) 0%, rgba(30, 17, 34, 1) 100%);
+    font-family: Fira Mono, monospace;
+    color: white;
+    text-shadow: -1px -1px 1px 1px #000;
+  }
+}
