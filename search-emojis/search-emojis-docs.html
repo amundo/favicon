@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>&lt;search-emojis&gt; docs</title>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="search-emojis-docs.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">&lt;search-emojis&gt; docs</h1>
+</header>
+<main>
+<p>This component allows the user to search for emojis by name.
+<strike>It also allows the user to filter the emojis by
+category.</strike></p>
+<p>It does not display the emojis, it only provides a search field which
+controls the search and filter functionality. It dispatches an event
+with the search results, which can be listened for by another component
+that displays the emojis. Thus, a variety of components can be used to
+display the emojis.</p>
+<p>The <code>emojis.json</code> file is included in this component. It
+contains an array of emoji objects, each with a <code>name</code> and
+<code>category</code> property. This file is used to search and filter
+the emojis.</p>
+<p>You can see it the data here:</p>
+<p><a href="emojis.json">emojis.json</a></p>
+<p>I used the data file from GitHub’s <a
+href="https://github.com/github/gemoji">gemoji</a> project. Check out
+the data file <a
+href="https://github.com/github/gemoji/blob/master/db/emoji.json">here</a>.</p>
+<section id="example" class="level2">
+<h2>Example</h2>
+<p>The small script below listens for the
+<code>emoji-search-results</code> event and displays the search results
+in a <code>&lt;pre&gt;</code> element.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;search-emojis</span> <span class="er">id</span><span class="ot">=</span><span class="st">demo</span><span class="kw">&gt;&lt;/search-emojis&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;pre</span> <span class="er">id</span><span class="ot">=</span><span class="st">data</span> <span class="er">placeholder</span><span class="ot">=</span><span class="st">&quot;Search data will be logged here…&quot;</span><span class="kw">&gt;&lt;/pre&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;script&gt;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">addEventListener</span>(<span class="st">&#39;emoji-search-results&#39;</span><span class="op">,</span> e <span class="kw">=&gt;</span> {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> searchResults <span class="op">=</span> e<span class="op">.</span><span class="at">detail</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> pre <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="fu">querySelector</span>(<span class="st">&#39;#data&#39;</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  pre<span class="op">.</span><span class="at">textContent</span> <span class="op">=</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(searchResults<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/script&gt;</span></span></code></pre></div>
+<search-emojis id=demo></search-emojis>
+<pre id=data class=code-sample>
+</pre>
+<script>
+addEventListener('emoji-search-results', e => {
+  let searchResults = e.detail
+  let pre = document.querySelector('#data')
+  pre.textContent = JSON.stringify(searchResults, null, 2)
+})
+</script>
+</section>
+<section id="methods" class="level2">
+<h2>Methods</h2>
+<ul>
+<li><code>search(query)</code> - search for emojis by name
+<ul>
+<li><code>query</code> - the search query, a string</li>
+</ul></li>
+</ul>
+<p>Note that</p>
+</section>
+<section id="data" class="level2">
+<h2>Data</h2>
+<ul>
+<li><code>.data</code> - an array of emoji objects
+<ul>
+<li><code>name</code> - the name of the emoji</li>
+<li><code>category</code> - the category of the emoji</li>
+</ul></li>
+</ul>
+</section>
+<section id="events" class="level2">
+<h2>Events</h2>
+<section id="dispatched" class="level3">
+<h3>Dispatched</h3>
+<ul>
+<li><code>emoji-search-results</code> - when search results are received
+<ul>
+<li><code>detail</code> - the search results, an array of emoji
+objects</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="todo" class="level2">
+<h2>Todo</h2>
+<ul>
+<li>Perhaps refactor as a more general character search component, with
+a <code>characters.json</code> file that contains all characters, not
+just emojis. This would allow the component to be used for searching for
+any character, not just emojis. The <code>characters.json</code> file
+could be generated from the Unicode character database.</li>
+<li>Add support for quoted search terms, so that the user can search for
+an exact phrase or word, e.g. <code>"smiling face with hearts"</code> or
+<code>"smiling"</code>.</li>
+</ul>
+</main>
+<script type="module">
+import {SearchEmojis} from './SearchEmojis.js'
+
+window.searchEmojis = document.querySelector('search-emojis')
+</script>
+</section>
+<section id="see-also" class="level2">
+<h2>See also</h2>
+<ul>
+<li><a href="../emoji-picker/emoji-picker-docs.html">emoji-picker</a>
+component, which implements a basic search interface with results and
+selection capability.</li>
+</ul>
+</section>
+</body>
+</html>

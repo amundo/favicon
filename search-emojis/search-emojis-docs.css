@@ -1,3 +1,9 @@
-
 @import url(search-emojis.css);
 @import url(../css/component-docs.css);
+
+.code-sample {
+  height:20em;
+  overflow-y:scroll;
+  background:#333;
+  color:limegreen;
+}

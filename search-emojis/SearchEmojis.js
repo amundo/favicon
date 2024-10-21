@@ -1,5 +1,4 @@
 import { searchEmojis } from "./search-emojis.js"
-import { CopyButton } from "../copy-button/CopyButton.js"
 
 class SearchEmojis extends HTMLElement {
   #emojis = [] 
