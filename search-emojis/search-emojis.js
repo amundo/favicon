@@ -27,13 +27,13 @@ class EmojiSearcher {
         .filter(queryTerm => queryTerm.length > 0);
     }
 
-    return this.emojis.filter(emoji => {
-      return query.every(queryTerm => {
-        return [emoji.description, ...emoji.aliases, ...emoji.tags].some(value => {
-          return value.toLowerCase().includes(queryTerm.toLowerCase());
-        })
-      })
-    })
+    return this.emojis.filter(emoji => 
+      query.every(queryTerm =>
+        [emoji.description, ...emoji.aliases, ...emoji.tags].some(value => 
+          value.toLowerCase().includes(queryTerm.toLowerCase())
+        )
+      )
+    )
   }
 }
 

@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>&lt;emoji-picker&gt; docs</title>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <link rel="stylesheet" href="emoji-picker-docs.css" />
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">&lt;emoji-picker&gt; docs</h1>
+</header>
+<main>
+<p>This component provides an interface for selecting an emoji by name
+or category.</p>
+<p>It makes use of the subcomponent
+<code>&lt;search-emojis&gt;</code>.</p>
+<section id="example" class="level2">
+<h2>Example</h2>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;emoji-picker&gt;&lt;/emoji-picker&gt;</span></span></code></pre></div>
+<emoji-picker></emoji-picker>
+</section>
+<section id="attributes" class="level2">
+<h2>Attributes</h2>
+</section>
+<section id="methods" class="level2">
+<h2>Methods</h2>
+</section>
+<section id="data" class="level2">
+<h2>Data</h2>
+</section>
+<section id="events" class="level2">
+<h2>Events</h2>
+<section id="dispatched" class="level3">
+<h3>Dispatched</h3>
+<ul>
+<li><code>emoji-selected</code> - when an emoji is selected
+<ul>
+<li><code>detail</code> - the emoji object</li>
+</ul></li>
+</ul>
+</section>
+<section id="listened-for" class="level3">
+<h3>Listened for</h3>
+<ul>
+<li><code>emoji-search-results</code> - when search results are received
+<ul>
+<li><code>detail</code> - the search results, an array of emoji
+objects</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="layouts" class="level2">
+<h2>Layouts</h2>
+</section>
+<section id="see-also" class="level2">
+<h2>See also</h2>
+</main>
+<script type="module">
+import {EmojiPicker} from './EmojiPicker.js'
+
+window.emojiPicker = document.querySelector('emoji-picker')
+</script>
+</section>
+</body>
+</html>

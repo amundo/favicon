@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "build": "pandoc -f markdown -t html --section-divs --css emoji-picker-docs.css --template=template.html -o emoji-picker-docs.html emoji-picker-docs.md"
+  }
+}
