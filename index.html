@@ -6,6 +6,25 @@
 <title>Emoji to Favicon Link Generator</title>
 <style>
 @import "emoji-favicon-generator/emoji-favicon-generator.css";
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100vh;
+}
+body {
+  height: 100%;
+}
+
+html, body, emoji-favicon-generator {
+  overflow-y: scroll;
+}
+body {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  
+}
 </style>
 </head>
 <body>
