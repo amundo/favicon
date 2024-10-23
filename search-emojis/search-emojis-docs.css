@@ -2,8 +2,8 @@
 @import url(../css/component-docs.css);
 
 .code-sample {
-  height:20em;
-  overflow-y:scroll;
-  background:#333;
-  color:limegreen;
+  height: 20em;
+  overflow-y: scroll;
+  background: #333;
+  color: limegreen;
 }

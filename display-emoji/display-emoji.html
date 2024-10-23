@@ -1,21 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>  
-  <title>&lt;display-emoji></title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="display-emoji.css">
+  <head>
+    <title>&lt;display-emoji></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="display-emoji.css" />
+  </head>
+  <body>
+    <display-emoji></display-emoji>
 
-</head>
-<body>
+    <script type="module">
+      import { DisplayEmoji } from "./DisplayEmoji.js"
 
-    <display-emoji></display-emoji>  
-
-<script type="module">
-import {DisplayEmoji} from './DisplayEmoji.js'
-
-window.DisplayEmoji = document.querySelector('display-emoji')
-</script>
-
-</body>
+      window.DisplayEmoji = document.querySelector("display-emoji")
+    </script>
+  </body>
 </html>

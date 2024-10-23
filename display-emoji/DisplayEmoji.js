@@ -1,7 +1,7 @@
 class DisplayEmoji extends HTMLElement {
   #emoji = null
 
-  constructor(){
+  constructor() {
     super()
 
     this.innerHTML = `
@@ -10,30 +10,30 @@ class DisplayEmoji extends HTMLElement {
     `
   }
 
-  async fetch(url){
+  async fetch(url) {
     let response = await fetch(url)
     let data = await response.json()
     this.data = data
   }
 
-  set data(emojiData){
+  set data(emojiData) {
     this.#emoji = emojiData
     this.render()
   }
 
-  get data(){
+  get data() {
     return this.#emoji
   }
 
-  render(){
+  render() {
     let { emoji, description } = this.data
-    this.querySelector('.emoji').textContent = emoji
-    this.querySelector('.description').textContent = description
+    this.querySelector(".emoji").textContent = emoji
+    this.querySelector(".description").textContent = description
   }
 
-  addEventListeners(){
+  addEventListeners() {
   }
 }
 
-export {DisplayEmoji}
-customElements.define('display-emoji', DisplayEmoji)
+export { DisplayEmoji }
+customElements.define("display-emoji", DisplayEmoji)

@@ -2,55 +2,55 @@
 @import "../emoji-picker/emoji-picker.css";
 
 emoji-favicon-generator {
-  > * { 
+  > * {
     padding: 1em;
   }
 
   height: 100%;
 
   display: grid;
-  grid-template: 
+  grid-template:
     "picker display" 1fr
-    "picker code"    1fr
-   / 1fr    1fr;
+    "picker code" 1fr
+    / 1fr 1fr;
 
   search-emojis form {
     display: flex;
-    column-gap: .1em;
+    column-gap: 0.1em;
     input {
       flex: 1;
     }
   }
-  
+
   emoji-picker {
-     grid-area: picker;
-     display: grid;
-     height: 100%;
-     grid-template-rows: auto 1fr;
+    grid-area: picker;
+    display: grid;
+    height: 100%;
+    grid-template-rows: auto 1fr;
 
-     div.matching-emoji-panel { 
-       display: grid;
-       height: 100%;
-       overflow-y: scroll;
+    div.matching-emoji-panel {
+      display: grid;
+      height: 100%;
+      overflow-y: scroll;
 
-       ul.matching-emojis-ul {
+      ul.matching-emojis-ul {
         height: 100%;
         display: flex;
         flex-wrap: wrap;
         align-content: start;
         overflow-y: scroll;
 
-        padding:0;
-        margin:0;
-        gap: .2em;
+        padding: 0;
+        margin: 0;
+        gap: 0.2em;
         list-style-type: none;
-       }
-     }
+      }
+    }
   }
 
   copy-textarea {
     display: grid;
     grid-template-rows: 1fr auto 1em;
-    padding:1em;
+    padding: 1em;
   }
 }

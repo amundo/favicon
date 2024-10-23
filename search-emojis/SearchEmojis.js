@@ -1,5 +1,5 @@
 class SearchEmojis extends HTMLElement {
-  #emojis = [] 
+  #emojis = []
   constructor() {
     super()
     this.innerHTML = `<form>
@@ -14,16 +14,17 @@ class SearchEmojis extends HTMLElement {
 
   async fetch() {
     try {
-      let url = new URL('./emojis.json', import.meta.url)
+      let url = new URL("./emojis.json", import.meta.url)
       let response = await fetch(url)
       let emojis = await response.json()
       this.data = emojis
       this.emojisByCharacter = this.cacheByCharacter(emojis)
-      
-      this.dispatchEvent(new CustomEvent('emojis-loaded', { 
+
+      this.dispatchEvent(
+        new CustomEvent("emojis-loaded", {
           detail: emojis,
-          bubbles: true
-        })
+          bubbles: true,
+        }),
       )
     } catch (error) {
       console.error(error)
@@ -37,7 +38,7 @@ class SearchEmojis extends HTMLElement {
     }, {})
   }
 
-  lookupEmoji(character){
+  lookupEmoji(character) {
     return this.emojisByCharacter[character]
   }
 
@@ -48,21 +49,21 @@ class SearchEmojis extends HTMLElement {
 
   get data() {
     return this.#emojis
-  } 
+  }
 
   enableInput() {
-    this.querySelector('input').removeAttribute('disabled')
+    this.querySelector("input").removeAttribute("disabled")
   }
 
   search(query) {
     const terms = query
-      .split(' ')
-      .map(queryTerm => queryTerm.trim())
-      .filter(queryTerm => queryTerm.length > 0)
+      .split(" ")
+      .map((queryTerm) => queryTerm.trim())
+      .filter((queryTerm) => queryTerm.length > 0)
 
-    return this.#emojis.filter(emoji => 
-      terms.every(queryTerm =>
-        [emoji.description, ...emoji.aliases, ...emoji.tags].some(value => 
+    return this.#emojis.filter((emoji) =>
+      terms.every((queryTerm) =>
+        [emoji.description, ...emoji.aliases, ...emoji.tags].some((value) =>
           value.toLowerCase().includes(queryTerm.toLowerCase())
         )
       )
@@ -70,20 +71,22 @@ class SearchEmojis extends HTMLElement {
   }
 
   addEventListeners() {
-    this.addEventListener('submit', submitEvent => {
+    this.addEventListener("submit", (submitEvent) => {
       submitEvent.preventDefault()
-      let query = submitEvent.target.querySelector('input').value
+      let query = submitEvent.target.querySelector("input").value
       if (!query) {
         return
       }
       let matchingEmojis = this.search(query)
-      this.dispatchEvent(new CustomEvent('emoji-search-results', {
-        detail: matchingEmojis,
-        bubbles: true
-      }))
+      this.dispatchEvent(
+        new CustomEvent("emoji-search-results", {
+          detail: matchingEmojis,
+          bubbles: true,
+        }),
+      )
     })
   }
 }
 
 export { SearchEmojis }
-customElements.define('search-emojis', SearchEmojis)
+customElements.define("search-emojis", SearchEmojis)

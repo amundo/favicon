@@ -5,9 +5,9 @@ emoji-picker {
   .matching-emojis-ul {
     display: flex;
     flex-wrap: wrap;
-    gap: .5em;
+    gap: 0.5em;
     list-style-type: none;
-    padding:0;
+    padding: 0;
     li {
       display: inline-block;
     }

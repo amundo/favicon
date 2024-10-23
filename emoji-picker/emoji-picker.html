@@ -1,29 +1,28 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>  
-  <title>&lt;emoji-picker></title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
-  <link rel="stylesheet" href="emoji-picker.css">
+  <head>
+    <title>&lt;emoji-picker></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="emoji-picker.css" />
+  </head>
+  <body>
+    <emoji-picker></emoji-picker>
 
-</head>
-<body>
+    <h2>
+      When emojis are updated, event <code>emoji-selected</code> is fired.
+    </h2>
 
-    <emoji-picker></emoji-picker>  
-
-    <h2>When emojis are updated, event <code>emoji-selected</code> is fired.</h2>
-    
     <pre id="log"></pre>
 
-<script type="module">
-import {EmojiPicker} from './EmojiPicker.js'
+    <script type="module">
+      import { EmojiPicker } from "./EmojiPicker.js"
 
-addEventListener('emoji-selected', emojiSelectedEvent => {
-  alert(emojiSelectedEvent)
-  document.querySelector('#log')
-    .textContent = JSON.stringify(emojiSelectedEvent.detail, null, 2)
-})
-</script>
-
-</body>
+      addEventListener("emoji-selected", (emojiSelectedEvent) => {
+        alert(emojiSelectedEvent)
+        document.querySelector("#log")
+          .textContent = JSON.stringify(emojiSelectedEvent.detail, null, 2)
+      })
+    </script>
+  </body>
 </html>
