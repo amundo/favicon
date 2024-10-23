@@ -3,7 +3,7 @@ class SearchEmojis extends HTMLElement {
   constructor() {
     super()
     this.innerHTML = `<form>
-      <input disabled placeholder="Search emojis" type="text" />
+      <input disabled placeholder="Search emojis" name="search-emojis-query-input" type="text" />
       <button type="submit">Search</button>
     </form>
     <ul class=matching-emojis></ul>
@@ -70,20 +70,31 @@ class SearchEmojis extends HTMLElement {
     )
   }
 
+  runQuery() {
+    let query = this.querySelector("input[name=search-emojis-query-input]").value
+    if (!query) {
+      return
+    }
+    let matchingEmojis = this.search(query)
+    this.dispatchEvent(
+      new CustomEvent("emoji-search-results", {
+        detail: matchingEmojis,
+        bubbles: true,
+      }),
+    )
+
+  }
+
   addEventListeners() {
-    this.addEventListener("submit", (submitEvent) => {
+    this.addEventListener("submit", submitEvent => {
       submitEvent.preventDefault()
-      let query = submitEvent.target.querySelector("input").value
-      if (!query) {
-        return
+      this.runQuery()
+    })
+
+    this.addEventListener('keyup', keyupEvent  => {
+      if(keyupEvent.target.matches('input[name=search-emojis-query-input]')) {
+          this.runQuery()
       }
-      let matchingEmojis = this.search(query)
-      this.dispatchEvent(
-        new CustomEvent("emoji-search-results", {
-          detail: matchingEmojis,
-          bubbles: true,
-        }),
-      )
     })
   }
 }
