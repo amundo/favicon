@@ -1,4 +1,9 @@
-
 display-emoji {
-  display: block;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+  gap:1em;
+  h2 {
+    font-size: 3rem;
+  }
 }
