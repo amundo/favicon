@@ -72,9 +72,7 @@ class SearchEmojis extends HTMLElement {
 
   runQuery() {
     let query = this.querySelector("input[name=search-emojis-query-input]").value
-    if (!query) {
-      return
-    }
+
     let matchingEmojis = this.search(query)
     this.dispatchEvent(
       new CustomEvent("emoji-search-results", {

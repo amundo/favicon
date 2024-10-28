@@ -1,3 +1,11 @@
+let search =  (emojis, query) => emojis.filter((emoji) =>
+  query.every((queryTerm) =>
+    [emoji.description, ...emoji.aliases, ...emoji.tags].some((value) =>
+      value.toLowerCase().includes(queryTerm.toLowerCase())
+    )
+  )
+)
+
 class EmojiSearcher {
   constructor() {
     this.emojis = null
@@ -20,6 +28,8 @@ class EmojiSearcher {
       await this.fetchEmojis()
     }
 
+    let queryTerms
+    
     if (!Array.isArray(query)) {
       query = query
         .split(" ")
@@ -27,13 +37,7 @@ class EmojiSearcher {
         .filter((queryTerm) => queryTerm.length > 0)
     }
 
-    return this.emojis.filter((emoji) =>
-      query.every((queryTerm) =>
-        [emoji.description, ...emoji.aliases, ...emoji.tags].some((value) =>
-          value.toLowerCase().includes(queryTerm.toLowerCase())
-        )
-      )
-    )
+    return search(this.emojis, queryTerms)
   }
 }
 
