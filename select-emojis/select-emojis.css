@@ -1,0 +1,10 @@
+@import "../emoji-picker/emoji-picker.css";
+
+select-emojis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  section.selected-emojis {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+  }
+}

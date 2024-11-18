@@ -17,6 +17,23 @@
         height: 100%;
       }
 
+      body > header {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      body > header > h1 {
+        margin: 0;
+        flex: 3;
+      }
+
+      body > header > p {
+        text-wrap: balance;
+        flex:1;
+        font-size: small;
+        color: #333;;
+      }
+
       html, body, emoji-favicon-generator {
         overflow-y: scroll;
       }
@@ -27,7 +44,10 @@
     </style>
   </head>
   <body>
-    <h1>Generate an Emoji Favicon</h1>
+    <header>
+      <h1>Generate an Emoji Favicon</h1>
+      <p>Choose an emoji and code will be generated that you can add to the &lt;head> of your <code>HTML</code> document. Then a favicon will be generated like the one in the current tab.</p>
+    </header>
 
     <emoji-favicon-generator></emoji-favicon-generator>
 

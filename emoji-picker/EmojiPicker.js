@@ -71,7 +71,8 @@ class EmojiPicker extends HTMLElement {
   }
 
   connectedCallback() {
-    this.selectRandomEmoji()
+    // this.selectRandomEmoji()
+    // this is the wrong place to do this
   }
 
   get emojis() {
