@@ -53,6 +53,13 @@ class SelectEmojis extends HTMLElement {
   }
 
   addEventListeners(){
+    this.addEventListener('input', inputEvent => {
+      if(inputEvent.target.matches('textarea')){
+        const textarea = inputEvent.target
+        this.#emojis = textarea.value.split('').map(emoji => {emoji})
+      }
+    })
+
     this.addEventListener('emoji-selected', emojiSelectedEvent => {
       let emoji = emojiSelectedEvent.detail
       this.#emojis.push(emoji)
@@ -60,7 +67,6 @@ class SelectEmojis extends HTMLElement {
     })
 
     this.addEventListener("click", clickEvent => {
-
       if(clickEvent.target.matches('.copy-emojis')){
         this.copy()
       }

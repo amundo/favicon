@@ -1,5 +1,9 @@
 {
   "tasks": {
-    "build": "pandoc -f markdown -t html --section-divs --css search-emojis-docs.css --template=template.html -o search-emojis-docs.html search-emojis-docs.md"
+    "build-docs": "pandoc -f markdown -t html --section-divs --css search-emojis-docs.css --template=template.html -o search-emojis-docs.html search-emojis-docs.md",
+    "update-gemoji": "deno --allow-net --allow-write update-gemoji.js"
+  },
+  "imports": {
+    "@std/path": "jsr:@std/path@^1.0.8"
   }
 }
