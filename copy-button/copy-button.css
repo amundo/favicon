@@ -1,0 +1,5 @@
+copy-button {
+  display: inline-block;
+  position: relative;
+  cursor: copy;
+}

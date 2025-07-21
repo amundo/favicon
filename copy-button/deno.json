@@ -1,0 +1,5 @@
+{
+  "tasks": {
+    "build": "pandoc -f markdown -t html --section-divs --css copy-button-docs.css --template=template.html -o copy-button-docs.html copy-button-docs.md"
+  }
+}
